@@ -43,6 +43,12 @@ class LifeArray:
         print(self.LifeArr)
         print("")
     
+    def get(self,x,y): 
+        return self.LifeArr[x,y]
+
+    def change(self,x,y):
+        self.LifeArr[x,y] = 1 - self.LifeArr[x,y]
+        return self.LifeArr[x,y]
     def born(self, x, y):
         self.LifeArr[x,y] = 1
 

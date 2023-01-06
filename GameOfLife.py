@@ -54,10 +54,15 @@ while running:
             y,x = event.pos
             x = x // blocksize
             y = y // blocksize
-            array.born(x,y)
+            val = array.change(x,y)
+
             x*=blocksize
             y*=blocksize
-            pygame.draw.rect(screen,(min(x,255),min(y,255),0),pygame.Rect(y,x,blocksize,blocksize))
+            if val == 0:
+                color = (255,255,255)
+            else :
+                color = (min(x,255),min(y,255),0)
+            pygame.draw.rect(screen,color,pygame.Rect(y,x,blocksize-1,blocksize-1))
             pygame.display.flip()
 
     if not paused:
@@ -72,6 +77,7 @@ while running:
         surf.fill((0, 0, 0))
         rect = surf.get_rect()
         array.update()
+        count = 0
         for p in np.ndenumerate(array.LifeArr):
             if p[1] == 1:
                 x, y = p[0]
@@ -79,7 +85,6 @@ while running:
                 y*=blocksize
                 pygame.draw.rect(screen,(min(x,255),min(y,255),0),pygame.Rect(y,x,blocksize,blocksize))
         # Flip the display
-        
         pygame.display.flip()
 
         # Ensure program maintains a rate of 30 frames per second
